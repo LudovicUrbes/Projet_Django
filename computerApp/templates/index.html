@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang= "fr">
+<head>
+	{% block title %}
+	<title> PROJET DJANGO </title>
+	{% endblock %}
+
+	<meta charset= "utf-8" >
+	<meta name= "viewport" content= "width=device-width, initial-scale=1">
+
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+	<!-- CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<!-- JavaScript Bundle with Popper -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+	<h1>TEST</h1>
+
+	{% block menu %}
+			<!-- Barre de navigation -->
+			<ul id= "menu">
+			  <li id="nav_machines"><a href="{% url 'machines' %}"><b>NOPE</b></a></li>
+			  <li id="nav_home"><a href="{% url 'index' %}"><b>HOME</b></a></li>
+			  <li id="nav_employes"><a href="{% url 'add_machine' %}"><b>EMPLOYES</b></a></li>
+			  {% load static %}
+			  <li id="nav_login"><a href="./LOGIN.html"><img src="{% static 'computerapp/images/login.png' %}" width="100px" height="100px"></a></li>
+			</ul>
+	{% endblock %}
+	
+		<!-- On ajoute image ici depuis les static -->
+	{% load static %}
+	<img id="logo_home" src="{% static 'computerapp/images/logo.png' %}">
+		
+	{% block content %}
+		Blabla de la premiere page
+	{% endblock %}
+
+</body>
+</html>
