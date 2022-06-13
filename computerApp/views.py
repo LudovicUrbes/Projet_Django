@@ -25,8 +25,16 @@ machines = Machine.objects.filter(bureau.numero='001')
 """
 
 def index (request) :
-	context = {}
-	return render (request, 'index.html', context)
+	return render (request, 'index.html', {})
+
+def start (request) :
+	return render (request, 'start.html', {})
+
+def contact (request) :
+	return render (request, 'contact.html', {})
+
+def visualisation (request) :
+	return render (request, 'visualisation.html', {})
 
 def machine_list_view (request) :
 	machines = Machine.objects.all()

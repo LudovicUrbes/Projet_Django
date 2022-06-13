@@ -5,6 +5,7 @@ from django.db import models
 from regex import F
 import requests
 from datetime import datetime
+from django.contrib.auth.models import User
 
 # Create your models here.
 
