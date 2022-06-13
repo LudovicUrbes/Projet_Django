@@ -63,12 +63,59 @@
   }
 
   #decalage {
-    padding-left: 50px;
     padding-top: 20px;
   }
 
   #bas {
     padding-top: 20px;
+  }
+
+  body{
+    background: #8999A8;
+  }
+
+  .navbar, .dropdown-menu{
+	background:rgba(255,255,255,0.25);
+	border: none;
+  }
+
+  .nav>li>a, .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover, .dropdown-menu>li>a, .dropdown-menu>li{
+  	border-bottom: 3px solid transparent;
+  }
+
+  .navbar a, .dropdown-menu>li>a, .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover, .navbar-toggle{
+ 	color: #fff;
+  }
+
+  h2,h3{
+	color: #778899;
+  }
+
+  h4{
+	color: #fff;
+  }
+
+  .nav li:hover:nth-child(8n+1), .nav li.active:nth-child(8n+1){
+ 	border-bottom: #C4E17F 3px solid;
+  }
+
+  .nav li:hover:nth-child(8n+2), .nav li.active:nth-child(8n+2){
+  	border-bottom: #F7FDCA 3px solid;
+  }
+
+  .nav li:hover:nth-child(8n+3), .nav li.active:nth-child(8n+3){
+  	border-bottom: #FECF71 3px solid;
+  }
+
+  .navbar-toggle .icon-bar{
+	color: #fff;
+    background: #fff;
+  }
+
+  .connexion {
+	font-size : 150%; 
+	background: darkgrey; 
+	text-align: center;
   }
 
 	</style>
@@ -85,7 +132,7 @@
 			  </a>
 			  <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
 				<li>
-				  <a class="nav-link text-secondary">
+				  <a class="nav-link text-white">
 					<svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#"></use></svg>
 					Home
 				  </a>
@@ -114,49 +161,61 @@
 		  </div>
 		</div>
 	  </header>
+	 
+	<div id="login" class="panel panel-primary container" style="font-size : 150%; background: #b3b3b5; padding-left : 70px; height : 400px; padding-top: 60px; width: 30%;">
+	  <div class="panel-heading" style="font-size : 150%"><h3 class="panel-title"><strong style="color : black"> Connexion</strong></h3></div>
+	  <div class="panel-body">
+		<form id="frm-login" class="form-horizontal"  method="post" action="{% url 'login' %}">
+		{% csrf_token %}
+		  <fieldset>
+			<div class="form-group">
+			  <table>
+				<tr>
+				  <td  id="blanc">{{ form.username.label_tag }}</td>
+				  <td>{{ form.username }}</td> 
+				</tr>
+			  </table>
+			</div>
+			<div class="form-group">
+			  <table>
+				<tr>
+					<td id="blanc">{{ form.password.label_tag }}</td>
+					<td>{{ form.password }}</td> 
+				  </tr>
+			  </table>
+			</div>
+			<div class="form-group">
+			  <label class="control-label" for="btnSigner"></label>
+			  <div>
+				  <input id="btnSigner" class="btn btn-primary" type="submit" value="Se connecter">
+      			  <input type="hidden" name="next" value="{{ next }}">
+			  </div>  
+			</div>
+		  </fieldset>
+		</form>
 
-  <h1>Connexion</h1>
-
-  <form method="post" action="{% url 'login' %}" id="form">
-    {% csrf_token %}
-    <table>
-      <tr>
-        <td id="blanc">{{ form.username.label_tag }}</td>
-        <td>{{ form.username }}</td> 
-      </tr>
-      <tr>
-        <td id="blanc">{{ form.password.label_tag }}</td>
-        <td>{{ form.password }}</td> 
-      </tr>
-    </table>
-    <div id="bas">
-      <input type="submit" value="Se connecter">
-      <input type="hidden" name="next" value="{{ next }}">
-  </div>
-  </form>
-
-  <br>
-
-  {% block content %}
+		{% block content %}
   
-  {% if form.errors %}
-    <p id="blanc2">Votre nom d'utilisateur et votre mot de passe ne correspondent pas. Veuillez réessayer.</p>
-  {% endif %}
+  		{% if form.errors %}
+    		<p id="blanc2">Votre nom d'utilisateur et votre mot de passe ne correspondent pas. Veuillez réessayer.</p>
+  		{% endif %}
 
-  {% if next %}
-    {% if user.is_authenticated %}
-      <p id="blancé">Votre compte n'a pas accès à cette page. Procéder,
-        veuillez vous connecter avec un compte qui y a accès.
-      </p>
-    {% else %}
-      <p id="blanc2">Veuillez vous connecter pour voir cette page.</p>
-    {% endif %}
-  {% endif %}
+  		{% if next %}
+    		{% if user.is_authenticated %}
+      		<p id="blancé">Votre compte n'a pas accès à cette page. Procéder,
+        	veuillez vous connecter avec un compte qui y a accès.
+     		</p>
+    	{% else %}
+      		<p id="blanc2">Veuillez vous connecter pour voir cette page.</p>
+    	{% endif %}
+		{% endif %}
 
 
-  {# Assumes you setup the password_reset view in your URLconf #}
-  <p id="decalage"><a href="{% url 'password_reset' %}">Mot de passe perdu ?</a></p>
+  		{# Assumes you setup the password_reset view in your URLconf #}
+  		<p id="decalage"><a href="{% url 'password_reset' %}" style="color : black ;">Mot de passe perdu ?</a></p>
 
-  {% endblock %}
+  		{% endblock %}
+	  </div>
+	</div>
 </body>
 </html>

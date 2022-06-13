@@ -65,6 +65,24 @@
         padding-top: 40px;
     }
 
+
+  .nav li:hover:nth-child(8n+1), .nav li.active:nth-child(8n+1){
+ 	border-bottom: #C4E17F 3px solid;
+    }
+
+  .nav li:hover:nth-child(8n+2), .nav li.active:nth-child(8n+2){
+  	border-bottom: #F7FDCA 3px solid;
+    }
+
+  .nav li:hover:nth-child(8n+3), .nav li.active:nth-child(8n+3){
+  	border-bottom: #FECF71 3px solid;
+    }
+
+  .navbar-toggle .icon-bar{
+	color: #fff;
+    background: #fff;
+    }
+
 	</style>
 
 </head>
@@ -78,24 +96,35 @@
 				R&T DEVELOPMENT
 			  </a>
 			  <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-				<li>
-				  <a href="index.html" class="nav-link text-secondary">
-					<svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#"></use></svg>
-					Home
-				  </a>
-				</li>
-				<li>
-				  <a href="visualisation.html" class="nav-link text-white">
-					<svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#"></use></svg>
-					Visualisation
-				  </a>
-				</li>
-				<li>
-				  <a href="contact.html" class="nav-link text-white">
-					<svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#"></use></svg>
-					Contact
-				  </a>
-				</li>
+          <li>
+            {% if user.is_authenticated %}
+  
+            {% else %}
+              <a href="{% url 'start' %}" class="nav-link text-white">
+                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#"></use></svg>
+              Se connecter
+                </a>
+            {% endif %}
+  
+          </li>
+          <li>
+            <a href="{% url 'index' %}" class="nav-link text-white">
+              <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#"></use></svg>
+              Home
+            </a>
+            </li>
+            <li>
+            <a href="{% url 'visualisation' %}" class="nav-link text-white">
+              <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#"></use></svg>
+              Visualisation
+            </a>
+            </li>
+            <li>
+            <a href="{% url 'contact' %}" class="nav-link text-white">
+              <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#"></use></svg>
+              Contact
+            </a>
+            </li>
 			  </ul>
 			</div>
 		  </div>
@@ -113,82 +142,86 @@
 		  </div>
 		</div>
 	  </header>
-
-      <div class="jumbotron jumbotron-sm" style="margin-top: 20px;">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 col-lg-12">
-                    <h1 class="h1"> <big> <big> Nous contacter </big> </big> ---------- Sentez vous libre de nous contacter </h1>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid" id="contact">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="well well-sm">
-                    <form>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="name">
-                                    Nom d'utilisateur</label>
-                                <input type="text" class="form-control" id="name" placeholder="Entrer votre nom d'utilisateur" required="required" />
-                            </div>
-                            <div class="form-group">
-                                <label for="email">
-                                    Adresse Email</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span>
-                                    </span>
-                                    <input type="email" class="form-control" id="email" placeholder="Entrer votre adresse email" required="required" /></div>
-                            </div>
-                            <div class="form-group">
-                                <label for="subject">
-                                    Sujet</label>
-                                <select id="subject" name="subject" class="form-control" required="required">
-                                    <option value="na" selected="">Choose One:</option>
-                                    <option value="service">General Customer Service</option>
-                                    <option value="suggestions">Suggestions</option>
-                                    <option value="product">Product Support</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="name">
-                                    Message</label>
-                                <textarea name="message" id="message" class="form-control" rows="9" cols="25" required="required"
-                                    placeholder="Message"></textarea>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <button type="submit" class="btn btn-primary pull-right" id="btnContactUs">
-                                Send Message</button>
-                        </div>
-                    </div>
-                    </form>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <form>
-                <legend><span class="glyphicon glyphicon-globe"></span> Our office</legend>
-                <address>
-                    <strong>Twitter, Inc.</strong><br>
-                    795 Folsom Ave, Suite 600<br>
-                    San Francisco, CA 94107<br>
-                    <abbr title="Phone">
-                        P:</abbr>
-                    (123) 456-7890
-                </address>
-                <address>
-                    <strong>Full Name</strong><br>
-                    <a href="mailto:#">first.last@example.com</a>
-                </address>
-                </form>
-            </div>
-        </div>
-    </div>
+    {% if user.is_authenticated %}
+    <div class="jumbotron jumbotron-sm" style="margin-top: 20px;">
+      <div class="container">
+          <div class="row">
+              <div class="col-sm-12 col-lg-12">
+                  <h1 class="h1"> <big> <big> Nous contacter </big> </big> ---------- Sentez vous libre de nous contacter </h1>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="container-fluid" id="contact">
+      <div class="row">
+          <div class="col-md-8">
+              <div class="well well-sm">
+                  <form>
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="form-group">
+                              <label for="name">
+                                  Nom d'utilisateur</label>
+                              <input type="text" class="form-control" id="name" placeholder="Entrer votre nom d'utilisateur" required="required" />
+                          </div>
+                          <div class="form-group">
+                              <label for="email">
+                                  Adresse Email</label>
+                              <div class="input-group">
+                                  <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span>
+                                  </span>
+                                  <input type="email" class="form-control" id="email" placeholder="Entrer votre adresse email" required="required" /></div>
+                          </div>
+                          <div class="form-group">
+                              <label for="subject">
+                                  Sujet</label>
+                              <select id="subject" name="subject" class="form-control" required="required">
+                                  <option value="na" selected="">Choisissez-en une:</option>
+                                  <option value="service">Communication avec l'admin réseau</option>
+                                  <option value="suggestions">Suggestions</option>
+                                  <option value="product">Support poste</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="form-group">
+                              <label for="name">
+                                  Message</label>
+                              <textarea name="message" id="message" class="form-control" rows="9" cols="25" required="required"
+                                  placeholder="Ecrire votre message ici ... "></textarea>
+                          </div>
+                      </div>
+                      <div class="col-md-12">
+                          <button type="submit" class="btn btn-primary pull-right" id="btnContactUs">
+                              Envoyez le message</button>
+                      </div>
+                  </div>
+                  </form>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <form>
+              <legend><span class="glyphicon glyphicon-globe"></span>Notre société</legend>
+              <address>
+                  <strong>R&T Chatellerault</strong><br>
+                  IUT de Poitiers - Site de Châtellerault <br/>
+                  34 Rue Alfred Nobel <br/>
+                  86100 Châtellerault, France	<br/>
+                  <abbr title="Numéro">
+                      Tel :</abbr>
+                      (33) (0)5 49 02 52 10
+              </address>
+              <address>
+                  <strong>Adresse mail</strong><br>
+                  <a href="mailto:#">admin@R&T-Developpement</a>
+              </address>
+              </form>
+          </div>
+      </div>
+  </div>
+	  {% else %}
+		
+	  {% endif %}
     
 </body>
 </html>

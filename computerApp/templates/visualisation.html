@@ -38,6 +38,23 @@
 		margin-left: 25%;
 	}
 
+	.nav li:hover:nth-child(8n+1), .nav li.active:nth-child(8n+1){
+ 	border-bottom: #C4E17F 3px solid;
+  	}
+
+  .nav li:hover:nth-child(8n+2), .nav li.active:nth-child(8n+2){
+  	border-bottom: #F7FDCA 3px solid;
+  	}
+
+  .nav li:hover:nth-child(8n+3), .nav li.active:nth-child(8n+3){
+  	border-bottom: #FECF71 3px solid;
+  	}
+
+  .navbar-toggle .icon-bar{
+	color: #fff;
+    background: #fff;
+  	}
+
 	</style>
 
 </head>
@@ -52,19 +69,30 @@
 			  </a>
 			  <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
 				<li>
-				  <a href="index.html" class="nav-link text-secondary">
+					{% if user.is_authenticated %}
+
+					{% else %}
+						<a href="{% url 'start' %}" class="nav-link text-white">
+							<svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#"></use></svg>
+						Se connecter
+					  	</a>
+					{% endif %}
+
+				</li>
+				<li>
+				  <a href="{% url 'index' %}" class="nav-link text-white">
 					<svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#"></use></svg>
 					Home
 				  </a>
 				</li>
 				<li>
-				  <a href="visualisation.html" class="nav-link text-white">
+				  <a href="{% url 'visualisation' %}" class="nav-link text-white">
 					<svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#"></use></svg>
 					Visualisation
 				  </a>
 				</li>
 				<li>
-				  <a href="contact.html" class="nav-link text-white">
+				  <a href="{% url 'contact' %}" class="nav-link text-white">
 					<svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#"></use></svg>
 					Contact
 				  </a>
@@ -86,17 +114,13 @@
 		  </div>
 		</div>
 	  </header>
-
-    <div>
-          <button type="button" href="{% url 'machines' %}">Machines</button>
-    </div>
-
-    <br/>
-    <br/>
-    <br/>
-
-    <div>
-        <button type="button" href="{% url 'add-machine' %}">Ajout Machines</button>
+	  {% if user.is_authenticated %}
+	  	<div style="padding-left: 40px; padding-top: 40px; text-align: center;">
+        	<button type="submit"><a href="{% url 'machines' %}" style ="color : black; text-decoration: none; font-size : 250% ;">Tableau machines</a></button>
+    	</div>
+	  {% else %}
+		
+	  {% endif %}
     </div>
 </body>
 </html>
