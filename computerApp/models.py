@@ -21,6 +21,20 @@ class Machine(models.Model):
     nom = models.CharField(max_length=20)
     maintenanceDate = models.DateField(default = datetime.now())
     mach = models.CharField(max_length=32, choices=TYPE, default='PC')
+
+class Employe(models.Model):
+    TYPE = (
+        ('Employé', ('Employé')),
+        ('Secrétaire', ('Secrétaire')),
+        ('Comptable', ('Comptable')),
+        ('Technicien', ('Technicien')),
+        ('Chef de projet', ('Chef de projet')),
+        ('Chef d\'entreprise', ('Chef d\'entreprise'))
+    )
+    id = models.AutoField(primary_key=True, editable=False)
+    nom = models.CharField(max_length=20)
+    prenom = models.CharField(max_length=20)
+    mach = models.CharField(max_length=32, choices=TYPE, default='Employé')
     
 """
     id = models.AutoField(

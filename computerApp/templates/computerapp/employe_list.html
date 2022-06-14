@@ -38,7 +38,7 @@
 		margin-left: 25%;
 	}
 
-	.nav li:hover:nth-child(8n+1), .nav li.active:nth-child(8n+1){
+    .nav li:hover:nth-child(8n+1), .nav li.active:nth-child(8n+1){
  	border-bottom: #C4E17F 3px solid;
   	}
 
@@ -69,18 +69,7 @@
 			  </a>
 			  <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
 				<li>
-					{% if user.is_authenticated %}
-
-					{% else %}
-						<a href="{% url 'start' %}" class="nav-link text-white">
-							<svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#"></use></svg>
-						Se connecter
-					  	</a>
-					{% endif %}
-
-				</li>
-				<li>
-				  <a href="{% url 'index' %}" class="nav-link text-white">
+				  <a href="{% url 'index' %}" class="nav-link text-secondary">
 					<svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#"></use></svg>
 					Home
 				  </a>
@@ -114,16 +103,36 @@
 		  </div>
 		</div>
 	  </header>
-	  {% if user.is_authenticated %}
-	  	<div style="padding-left: 40px; padding-top: 40px; text-align: center;">
-        	<button type="submit"><a href="{% url 'machines' %}" style ="color : black; text-decoration: none; font-size : 250% ;">Tableau machines</a></button>
-    	</div>
-		<div style="padding-left: 40px; padding-top: 40px; text-align: center;">
-        	<button type="submit"><a href="{% url 'employes' %}" style ="color : black; text-decoration: none; font-size : 250% ;">Tableau des employés</a></button>
-    	</div>
-	  {% else %}
-		
-	  {% endif %}
-    </div>
-</body>
-</html>
+{% block content %}
+	{% if employe %}
+		  <div class="pure-g" style="background-color : white ; height: 600px; padding-top: 35px; width: 80%; margin-left: 200px;" >
+			  <div class="pure-u-7-8">
+					  <div class="container"> 
+						  <div class="machines">
+							  <h2>Liste des employés</h2>
+						  </div>
+						  {% for employe in employes %}
+						  <table class="pure-table pure-table-stripped table" style="width: 100%;">
+							  <thead>
+								  <tr>
+									  <th>ID</th>
+									  <th>Nom</th>
+									  <th>Prénom</th>
+									  <th>Job</th>
+								  </tr>
+							  </thead>
+							  <tbody>
+								  <tr>
+									  <td>{{ employe.id}}</td>
+									  <td>{{ employe.nom}}</td>
+									  <td>{{ employe.prenom }}</td>
+									  <td>{{ employe.mach }}</td>
+								  </tr>
+							  </tbody>
+						  </table>
+						  {% endfor %}
+					  </div>
+			  </div>
+		  </div>
+	{% endif %}
+{% endblock %}

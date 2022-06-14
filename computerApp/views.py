@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from computerApp.models import Machine
-from computerApp.forms import AddMachineForm
+from computerApp.models import Employe, Machine
+from computerApp.forms import AddEmployeForm, AddMachineForm
 
 # Create your views here.
 
@@ -58,3 +58,28 @@ def machine_add_form(request):
 		context = {'form' : form}
 		return render(request,
 	 	 'computerapp/machine_add.html',context)
+
+def employe_list_view (request) :
+	employes = Employe.objects.all()
+	context = {'employes': employes}
+	return render(request, 'computerapp/employe_list.html',context)	
+
+def employe_detail_view(request , pk):
+	employe = get_object_or_404(Employe, id=pk)
+	context={'employe': employe}
+	return render(request, 'computerapp/employe_detail.html', context)
+
+
+def employe_add_form(request):
+	if request.method == 'POST':
+		form = AddEmployeForm(request.POST or None)
+		if form.is_valid():
+			new_employe = Employe(nom=form.cleaned_data['nom'])
+			new_employe_2 = Employe(prenom=form.cleaned_data['prenom'])
+			new_employe.save()
+			new_employe_2.save()
+			return redirect('employes')
+	else :
+		form = AddEmployeForm()
+		context = {'form' : form}
+		return render(request,'computerapp/employe_add.html',context)
